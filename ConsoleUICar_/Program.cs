@@ -11,9 +11,9 @@ namespace ConsoleUICar_
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var cars in carManager.GetCarsByBrandId(1))
+            foreach (var cars in carManager.GetProductDetails())
             {
-                Console.WriteLine(cars.CarId+ " "+ cars.Description+" " +cars.DailyPrice);
+                Console.WriteLine("{0} -- {1} -- {2} -- {3}" ,cars.CarId,cars.BrandId,cars.ColorName,cars.Description);
             }
             Console.ReadKey();
         }
