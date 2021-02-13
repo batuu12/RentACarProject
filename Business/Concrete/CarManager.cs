@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -16,36 +18,37 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void AddCar(Car car, Brand brand)
+        public IResult AddCar(Car car, Brand brand)
         {
             if (car.DailyPrice>0 && brand.BrandName.Length>2)
             {
-                Console.WriteLine("Ekle");
+                return new SuccessResult(Messages.CarAdded);
             }
-            else
+            return new ErrorResult(Messages.CarNameInvalid);
+        }
+
+        public IDataResult<List<Car>> GetAll()
+        {
+            if (DateTime.Now.Hour==03)
             {
-                Console.WriteLine("Hatalı Giriş");
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
+            return new SuccessDataResult<List<Car>>(Messages.CarListed);
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return _carDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(p=>p.BrandId==id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<CarDetailsDto>> GetProductDetails()
         {
-            return _carDal.GetAll(p => p.ColorId == id);
-        }
-
-        public List<CarDetailsDto> GetProductDetails()
-        {
-            return _carDal.GetProductDetails();
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetProductDetails());
         }
     }
 }
