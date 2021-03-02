@@ -1,8 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,16 +21,11 @@ namespace Business.Concrete
         }
         public IResult Add(User user)
         {
-            var result = user.Email.Contains("@");
-            if (result == true && user.FirstName.Length<1)
-            {
-                _userDal.Add(user);
-                return new SuccessResult(Messages.UserAdded);
-            }
-            else
-            {
-                return new ErrorResult(Messages.UserInvalidInfos);
-            }
+            ValidationTool.Validate(new UserValidator(), user);
+
+
+            _userDal.Add(user);
+            return new SuccessResult(Messages.UserAdded);
         }
 
         public IResult Delete(User user)
