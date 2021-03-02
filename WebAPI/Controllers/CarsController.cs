@@ -19,18 +19,18 @@ namespace WebAPI.Controllers
             _carService = carService;
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Car car,Brand brand)
-        {
-            var result = _carService.AddCar(car,brand);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+        //[HttpPost("add")]
+        //public IActionResult Add(Car car,Brand brand)
+        //{
+        //    var result = _carService.AddCar(car,brand);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
 
-        [HttpGet]
+        [HttpGet("getall")]
         public IActionResult GetAll()
         {
             var result = _carService.GetAll();
