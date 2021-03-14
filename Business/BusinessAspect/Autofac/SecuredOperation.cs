@@ -3,10 +3,9 @@ using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Core.Utilities.IoC;
+using Core.Extensions;
 
 namespace Business.BusinessAspect.Autofac
 {
