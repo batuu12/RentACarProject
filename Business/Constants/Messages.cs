@@ -40,7 +40,5 @@ namespace Business.Constants
         public static string UsersListed;
         public static string AuthorizationDenied = "Yetkiniz yok";
         public static string CarImageLimitExceeded;
-        internal static string AccessTokenCreated;
-        internal static string UserAlreadyExists;
     }
 }

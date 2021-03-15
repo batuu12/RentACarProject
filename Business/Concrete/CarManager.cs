@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Text;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Autofac.Transaction;
+using Core.Aspects.Autofac.Performance;
 
 namespace Business.Concrete
 {
@@ -27,6 +29,12 @@ namespace Business.Concrete
         {
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
+        }
+        [PerformanceAspect(5)]
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            return null;
         }
 
         public IDataResult<List<Car>> GetAll()
