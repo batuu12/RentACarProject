@@ -43,6 +43,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
+            _carDal.GetAll();
             return new SuccessDataResult<List<Car>>(Messages.CarListed);
         }
 

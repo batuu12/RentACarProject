@@ -34,10 +34,8 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete([FromForm(Name = ("Id"))] int Id)
+        public IActionResult Delete([FromForm(Name = ("Id"))] int Id,CarImage carImage)
         {
-
-            var carImage = _carImageService.GetAll(Id).Data;
 
             var result = _carImageService.Delete(carImage);
             if (result.Success)
@@ -48,9 +46,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm(Name = ("Id"))] int id)
+        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm(Name = ("Id"))] int id, CarImage carImage)
         {
-            var carImage = _carImageService.GetAll().Data;
+            var carImage_ = _carImageService.GetAll().Data;
             var result = _carImageService.Update(file,carImage);
             if (result.Success)
             {
